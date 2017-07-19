@@ -1,0 +1,139 @@
+<include file="Index/header"/>
+<style>
+    .indexcase>div{
+        margin-bottom: 10px;
+    }
+    .indexcase{
+        margin-bottom:50px;
+    }
+
+</style>
+<body>
+<div id="wrapper">
+
+    <include file="Index/nav"/>
+    <div id="page-wrapper">
+
+        <div class="container-fluid">
+            <ol class="breadcrumb">
+                <li>
+                    <i class="fa fa-dashboard"></i> <a href="/admin.php?c=indexcase">首页成功案例</a>
+                </li>
+                <li class="active">
+                    <i class="fa fa-edit"></i> 添加
+                </li>
+            </ol>
+            <!-- Page Heading -->
+
+            <div class="main-div">
+                <form name="main_form" method="POST" action="__SELF__" enctype="multipart/form-data">
+                    <div class="indexcase">
+                        <div class="input-group col-lg-6 col-xs-6">
+                            <span class="input-group-addon" >首页成功案例一标题</span>
+                            <input type="text" name="case_content1" id="case_title1" class="form-control "
+                                   placeholder="请输入标题" aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group col-lg-6 col-xs-6">
+                            <span class="input-group-addon" >首页成功案例一内容</span>
+                            <textarea type="text" name="case_content1" id="case_content1" class="form-control "
+                                      placeholder="请输入内容" aria-describedby="basic-addon1"></textarea>
+                        </div>
+                        <div class="input-group col-lg-6 col-xs-6">
+                            <span class="input-group-addon" id="thumb1">首页成功案例一缩略图</span>
+                            <div class="col-sm-5">
+                                <input id="file_upload1" type="file" multiple="true" name="thumb">
+                                <img style="display: none" id="upload_org_code_img1" src="" width="150" height="150">
+                                <input id="file_upload_image1" type="hidden" multiple="true" value="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="indexcase">
+                        <div class="input-group col-lg-6 col-xs-6">
+                            <span class="input-group-addon" >首页成功案例二标题</span>
+                            <input type="text" name="case_content1" id="case_title2" class="form-control "
+                                   placeholder="请输入标题" aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group col-lg-6 col-xs-6">
+                            <span class="input-group-addon" >首页成功案例二内容</span>
+                            <textarea type="text" name="case_content1" id="case_content2" class="form-control "
+                                      placeholder="请输入内容" aria-describedby="basic-addon1"></textarea>
+                        </div>
+                        <div class="input-group col-lg-6 col-xs-6">
+                            <span class="input-group-addon" id="thumb2">首页成功案例二缩略图</span>
+                            <div class="col-sm-5">
+                                <input id="file_upload2" type="file" multiple="true" >
+                                <img style="display: none" id="upload_org_code_img2" src="" width="150" height="150">
+                                <input id="file_upload_image2" name="thumb" type="hidden" multiple="true" value="">
+                            </div>
+                        </div>
+                    </div><div class="indexcase">
+                        <div class="input-group col-lg-6 col-xs-6">
+                            <span class="input-group-addon" >首页成功案例三标题</span>
+                            <input type="text" name="case_content1" id="case_title3" class="form-control "
+                                   placeholder="请输入标题" aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group col-lg-6 col-xs-6">
+                            <span class="input-group-addon" >首页成功案例三内容</span>
+                            <textarea type="text" name="case_content1" id="case_content3" class="form-control "
+                                      placeholder="请输入内容" aria-describedby="basic-addon1"></textarea>
+                        </div>
+                        <div class="input-group col-lg-6 col-xs-6">
+                            <span class="input-group-addon" id="thumb3">首页成功案例三缩略图</span>
+                            <div class="col-sm-5">
+                                <input id="file_uploa3" type="file" multiple="true" >
+                                <img style="display: none" id="upload_org_code_img3" src="" width="150" height="150">
+                                <input id="file_upload_image3"  name="thumb" type="hidden" multiple="true" value="">
+                            </div>
+                        </div>
+                    </div><div class="indexcase">
+                        <div class="input-group col-lg-6 col-xs-6">
+                            <span class="input-group-addon" id="-addon1">首页成功案例四标题</span>
+                            <input type="text" name="case_content1" id="case_title4" class="form-control "
+                                   placeholder="请输入标题" aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group col-lg-6 col-xs-6">
+                            <span class="input-group-addon" id="">首页成功案例四内容</span>
+                            <textarea type="text" name="case_content1" id="case_content4" class="form-control "
+                                      placeholder="请输入内容" aria-describedby="basic-addon1"></textarea>
+                        </div>
+                        <div class="input-group col-lg-6 col-xs-6">
+                            <span class="input-group-addon" id="thumb4">首页成功案例一缩略图</span>
+                            <div class="col-sm-5">
+                                <input id="file_upload" type="file" multiple="true" >
+                                <img style="display: none" id="upload_org_code_img" src="" width="150" height="150">
+                                <input id="file_upload_image" name="thumb" type="hidden" multiple="true" value="">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <script>
+                //$("#createtime").datepicker();
+                //UE.getEditor('content', {
+                //	"initialFrameWidth" : "100%",   // 宽
+                //	"initialFrameHeight" : 80,      // 高
+                //	"maximumWords" : 10000            // 最大可以输入的字符数量
+                //});
+            </script>
+            <!-- /.row -->
+
+
+        </div>
+        <!-- /.container-fluid -->
+
+    </div>
+    <!-- /#page-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+<script>
+    //    var SCOPE = {
+    //        'edit_url' : '/admin.php?c=content&a=edit',
+    //        'add_url' : '/admin.php?c=content&a=add',
+    //        'set_status_url' : '/admin.php?c=content&a=setStatus',
+    //        'sing_news_view_url' : '/index.php?c=view',
+    //        'listorder_url' : '/admin.php?c=content&a=listorder',
+    //        'push_url' : '/admin.php?c=content&a=push',
+    //    }
+</script>
+<include file="Index/footer"/>

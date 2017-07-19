@@ -1,0 +1,91 @@
+<include file="Index/header" />
+<body>
+<div id="wrapper">
+
+    <include file="Index/nav"/>
+    <div id="page-wrapper">
+
+        <div class="container-fluid" >
+
+            <!-- Page Heading -->
+
+<div class="main-div">
+    <form name="main_form" method="POST" action="__SELF__" enctype="multipart/form-data">
+        <table cellspacing="1" cellpadding="3" width="100%">
+            <tr>
+                <td class="label">募集基金文件id：</td>
+                <td>
+                    <input  type="text" name="fileraise_id" value="" />
+                </td>
+            </tr>
+            <tr>
+                <td class="label">募集基金id：</td>
+                <td>
+                    <input  type="text" name="raise_id" value="" />
+                </td>
+            </tr>
+            <tr>
+                <td class="label">文件名称：</td>
+                <td>
+                    <input  type="text" name="filename" value="" />
+                </td>
+            </tr>
+            <tr>
+                <td class="label">文件路径：</td>
+                <td>
+                    <input  type="text" name="filepath" value="" />
+                </td>
+            </tr>
+            <tr>
+                <td class="label">创建时间：</td>
+                <td>
+                    <input id="createtime" type="text" name="createtime" value="" />
+                </td>
+            </tr>
+            <tr>
+                <td class="label">状态：</td>
+                <td>
+                    <input  type="text" name="status" value="" />
+                </td>
+            </tr>
+            <tr>
+                <td class="label">备注：</td>
+                <td>
+                    <input  type="text" name="remark" value="" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="99" align="center">
+                    <input type="submit" class="button" value=" 确定 " />
+                    <input type="reset" class="button" value=" 重置 " />
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<script>
+$("#createtime").datepicker(); 
+</script>
+            <!-- /.row -->
+
+
+
+        </div>
+        <!-- /.container-fluid -->
+
+    </div>
+    <!-- /#page-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+<script>
+    //    var SCOPE = {
+    //        'edit_url' : '/admin.php?c=content&a=edit',
+    //        'add_url' : '/admin.php?c=content&a=add',
+    //        'set_status_url' : '/admin.php?c=content&a=setStatus',
+    //        'sing_news_view_url' : '/index.php?c=view',
+    //        'listorder_url' : '/admin.php?c=content&a=listorder',
+    //        'push_url' : '/admin.php?c=content&a=push',
+    //    }
+</script>
+<include file="Index/footer" />

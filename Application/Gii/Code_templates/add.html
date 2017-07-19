@@ -1,0 +1,117 @@
+<include file="Index/header" />
+<style>
+    .label{
+        color:black;
+    }
+    .<?php echo $tpName; ?>>div{
+        margin-bottom: 20px;
+    }
+    .<?php echo $tpName; ?>{
+        margin-bottom:50px;
+    }
+    .<?php echo $tpName; ?>>div>textarea{
+        height:150px;
+    }
+    #btn-group>input{
+        margin: 10px;
+    }
+
+</style>
+<body>
+<div id="wrapper">
+
+    <include file="Index/nav"/>
+    <div id="page-wrapper">
+
+        <div class="container-fluid" >
+            <ol class="breadcrumb">
+                <li>
+                    <i class="fa fa-dashboard"></i>  <a href="/admin.php?c=<?php echo $tpName; ?>"><?php echo $navName; ?></a>
+                </li>
+                <li class="active">
+                    <i class="fa fa-table"></i>添加
+                </li>
+            </ol>
+            <!-- Page Heading -->
+
+<div class="main-div">
+    <form name="main_form" method="POST" action="__SELF__" enctype="multipart/form-data">
+        <div class="<?php echo $tpName; ?>" width="100%">
+<?php if($config['digui'] == 1): ?>
+			<tr>
+				<td class="label">上级权限：</td>
+				<td>
+					<select name="parent_id">
+						<option value="0">顶级权限</option>
+						<?php echo "<?php foreach (\$parentData as \$k => \$v): ?>"; ?>
+						<option value="<?php echo "<?php echo \$v['{$config['pk']}']; ?>"; ?>"><?php echo "<?php echo str_repeat('-', 8*\$v['level']).\$v['{$config['diguiName']}']; ?>"; ?></option>
+						<?php echo "<?php endforeach; ?>"; ?>
+					</select>
+				</td>
+			</tr>
+<?php endif; ?>
+<?php foreach ($config['fields'] as $k => $v):if($v['type']=='null' || ($config['digui'] == 1 && 'parent_id' == $k)) continue; ?>
+            <div class="input-group col-lg-6 col-xs-6">
+                <span class="input-group-addon"><?php echo $v['text']; ?></span>
+<?php if($v['type'] == 'text'): ?>
+                    <input <?php if((strpos($k, 'time') !== FALSE) || (strpos($k, 'date') !== FALSE)) echo 'id="'.$k.'"'; ?> type="text" name="<?php echo $k; ?>" value="<?php echo $v['default']; ?>" />
+<?php elseif($v['type'] == 'password'): ?>
+                    <input type="password" size="25" name="<?php echo $k; ?>" />
+<?php elseif ($v['type'] == 'file'): ?>
+                	<input type="file" name="<?php echo $k; ?>" /> 
+<?php elseif ($v['type'] == 'html'): ?>
+                	<textarea id="<?php echo $k; ?>" name="<?php echo $k; ?>"><?php echo $v['default']; ?></textarea>
+<?php elseif ($v['type'] == 'radio'): $_i = 0; foreach ($v['values'] as $k1 => $v1): ?>
+                	<input type="radio" name="<?php echo $k; ?>" value="<?php echo $k1; ?>" <?php if($v['default'] == $k1) echo 'checked="checked"'; ?> /><?php echo $v1; ?> 
+<?php $_i++;endforeach;endif; ?>
+            </div>
+<?php endforeach; ?>
+            <div class="input-group col-lg-6 col-xs-6">
+                <span class="input-group-addon" id="thumb"><?php echo '<?php echo $navName; ?>'; ?>图片</span>
+                <div class="col-sm-5">
+                    <input id="file_upload" type="file" multiple="true">
+                    <input id="file_upload_image"  name="pic" type="hidden" multiple="true" value="<?php echo $data['pic']; ?>">
+                </div>
+            </div>
+                <img style="display: none" id="upload_org_code_img" src="<?php echo $data['pic']; ?>" width="150" height="150" alt="<?php echo $navName; ?>图片">
+        </div>
+
+            <div id="btn-group" class="input-group col-lg-6 col-xs-6" align="center">
+
+                <input type="submit" class="btn btn-default" value=" 确定 " />
+                <input type="reset" class="btn btn-default" id="cancel" value=" 取消  " />
+            </div>
+    </form>
+</div>
+<script>
+
+</script>
+            <!-- /.row -->
+
+
+
+        </div>
+        <!-- /.container-fluid -->
+
+    </div>
+    <!-- /#page-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+<script>
+        var SCOPE = {
+            'edit_url' : '/admin.php?c=<?php echo $tpName; ?>&a=edit',
+            'add_url' : '/admin.php?c=<?php echo $tpName; ?>&a=add',
+            'set_status_url' : '/admin.php?c=<?php echo $tpName; ?>&a=setStatus',
+            'ajax_upload_swf' : '/Public/js/party/uploadify.swf',
+            'ajax_upload_image_url' : '/admin.php?c=image&a=ajaxuploadimage',
+        }
+</script>
+<script src="/Public/js/admin/image.js"></script>
+<script>
+    var thumb = "<?php echo $data['pic']; ?>";
+    if(thumb) {
+        $("#upload_org_code_img").show();
+    }
+</script>
+<include file="Index/footer" />

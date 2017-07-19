@@ -1,0 +1,101 @@
+<include file="Index/header" />
+<body>
+<div id="wrapper">
+
+	<include file="Index/nav"/>
+	<div id="page-wrapper">
+
+		<div class="container-fluid" >
+
+			<!-- Page Heading -->
+
+<div class="main-div">
+    <form name="main_form" method="POST" action="__SELF__" enctype="multipart/form-data" >
+    	<input type="hidden" name="raise_id" value="<?php echo $data['raise_id']; ?>" />
+		<input type="hidden" name="old_pic" value="<?php echo $data['pic']; ?>" />
+		<input type="hidden" name="old_big_pic" value="<?php echo $data['big_pic']; ?>" />
+		<input type="hidden" name="old_mid_pic" value="<?php echo $data['mid_pic']; ?>" />
+		<input type="hidden" name="old_sm_pic" value="<?php echo $data['sm_pic']; ?>" />
+        <table cellspacing="1" cellpadding="3" width="100%">
+            <tr>
+                <td class="label">募集基金id：</td>
+                <td>
+                    <input  type="text" name="raise_id" value="<?php echo $data['raise_id']; ?>" />
+                </td>
+            </tr>
+            <tr>
+                <td class="label">募集基金标题：</td>
+                <td>
+                    <input  type="text" name="title" value="<?php echo $data['title']; ?>" />
+                </td>
+            </tr>
+            <tr>
+                <td class="label">募集基金详情：</td>
+                <td>
+                	<textarea id="content" name="content"><?php echo $data['content']; ?></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td class="label">创建时间：</td>
+                <td>
+                    <input id="createtime" type="text" name="createtime" value="<?php echo $data['createtime']; ?>" />
+                </td>
+            </tr>
+            <tr>
+                <td class="label">状态：</td>
+                <td>
+                    <input  type="text" name="status" value="<?php echo $data['status']; ?>" />
+                </td>
+            </tr>
+            <tr>
+                <td class="label">备注：</td>
+                <td>
+                    <input  type="text" name="remark" value="<?php echo $data['remark']; ?>" />
+                </td>
+            </tr>
+            <tr>
+                <td class="label">图片：</td>
+                <td>
+                	<input type="file" name="pic" /><br /> 
+                	<?php showImage($data['pic'], 100); ?>                </td>
+            </tr>
+            <tr>
+                <td colspan="99" align="center">
+                    <input type="submit" class="button" value=" 确定 " />
+                    <input type="reset" class="button" value=" 重置 " />
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<script>
+$("#createtime").datepicker(); 
+UE.getEditor('content', {
+	"initialFrameWidth" : "100%",   // 宽
+	"initialFrameHeight" : 80,      // 高
+	"maximumWords" : 10000            // 最大可以输入的字符数量
+});
+</script>
+			<!-- /.row -->
+
+
+
+		</div>
+		<!-- /.container-fluid -->
+
+	</div>
+	<!-- /#page-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+<script>
+    //    var SCOPE = {
+    //        'edit_url' : '/admin.php?c=content&a=edit',
+    //        'add_url' : '/admin.php?c=content&a=add',
+    //        'set_status_url' : '/admin.php?c=content&a=setStatus',
+    //        'sing_news_view_url' : '/index.php?c=view',
+    //        'listorder_url' : '/admin.php?c=content&a=listorder',
+    //        'push_url' : '/admin.php?c=content&a=push',
+    //    }
+</script>
+<include file="Index/footer" />

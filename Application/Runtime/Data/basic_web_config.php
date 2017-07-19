@@ -1,0 +1,1 @@
+a:5:{s:5:"title";s:6:"国诚";s:8:"keywords";s:6:"基金";s:11:"description";s:9:"基金网";s:9:"dumpmysql";s:1:"1";s:10:"cacheindex";s:1:"1";}
