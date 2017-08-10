@@ -1,0 +1,92 @@
+<include file="Index/header" />
+<body>
+<div id="wrapper">
+
+	<include file="Index/nav"/>
+	<div id="page-wrapper">
+
+		<div class="container-fluid" >
+
+			<!-- Page Heading -->
+
+			<!--导航栏-->
+			<div class="col-lg-12">
+
+				<ol class="breadcrumb">
+					<li>
+						<i class="fa fa-dashboard"></i>  <a href="/admin.php?c=Information"><?php echo $navName; ?></a>
+					</li>
+					<li class="active">
+						<i class="fa fa-table"></i>列表
+					</li>
+				</ol>
+			</div>
+			<!--导航栏结束-->
+			<!--添加按钮-->
+			<div>
+				<button id="button-add" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>添加 </button>
+			</div>
+			<!--添加按钮结束-->
+<!-- 列表 -->
+<div class="list-div" id="listDiv">
+	<table cellpadding="3" cellspacing="1" class="table table-bordered table-striped singcms-table">
+    	<tr>
+            <th >信息披露id</th>
+            <th >信息披露标题</th>
+            <th >图片</th>
+            <th >创建时间</th>
+            <!--<th >状态</th>-->
+            <!--<th >备注</th>-->
+			<th width="90">操作</th>
+        </tr>
+		<?php foreach ($data as $k => $v): ?>            
+			<tr class="tron">
+				<td><?php echo $v['information_id']; ?></td>
+				<td><?php echo $v['title']; ?></td>
+				<td><?php echo $v['pic']; ?></td>
+				<td><?php echo date('Y-m-d H:i:s',$v['createtime']); ?></td>
+				<!--<td><?php echo $v['status']; ?></td>-->
+				<!--<td><?php echo $v['remark']; ?></td>-->
+		        <td align="center">
+		        	<!--<a href="<?php echo U('edit?information_id='.$v['information_id'].'&p='.I('get.p')); ?>" title="编辑">-->
+		        	<a href="<?php echo U('edit?information_id='.$v['information_id']); ?>" title="编辑">
+						<span class="sing_cursor glyphicon glyphicon-edit" aria-hidden="true" id="singcms-edit"></span>
+					</a>
+	                <!--<a href="<?php echo U('delete?information_id='.$v['information_id'].'&p='.I('get.p')); ?>" onclick="return confirm('确定要删除吗？');" title="移除">-->
+						<!--<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>-->
+					<!--</a>-->
+					<a href="javascript:void(0)" id="singcms-delete" attr-id="<?php echo $v['information_id']; ?>" attr-message="移除">
+						<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+					</a>
+		        </td>
+	        </tr>
+        <?php endforeach; ?> 
+		<?php if(preg_match('/\d/', $page)): ?>  
+        <tr><td align="right" nowrap="true" colspan="99" height="30"><?php echo $page; ?></td></tr> 
+        <?php endif; ?> 
+	</table>
+</div>
+<script>
+
+</script>
+			<!-- /.row -->
+
+
+
+		</div>
+		<!-- /.container-fluid -->
+
+	</div>
+	<!-- /#page-wrapper -->
+
+</div>
+<script>
+    var SCOPE = {
+        'edit_url' : '/admin.php?c=<?php echo Information; ?>&a=edit',
+        'add_url' : '/admin.php?c=<?php echo Information; ?>&a=add',
+        'set_status_url' : '/admin.php?c=<?php echo Information; ?>&a=setStatus',
+        //'sing_news_view_url' : '/index.php?c=view',
+    }
+</script>
+<!-- /#wrapper -->
+<include file="Index/footer" />

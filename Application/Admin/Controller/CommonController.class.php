@@ -91,8 +91,19 @@ class CommonController extends Controller {
 		return show(0,'排序数据失败',array('jump_url' => $jumpUrl));
 	}
 
-	public function ajaxDelete($file_id=''){
-
+	public function ajaxDelete(){
+		$fileId = I('post.fileId');
+		$modelName = I('post.modelName');
+		$model = M($modelName);
+		$res = $model->where($modelName.'_id='.$fileId)->delete();
+		if($res){
+            deleteFiles(array(
+                I('post.oldFile'),
+            ));
+		    return show(1,'删除附件成功');
+        }else{
+		    return show(0,'删除附件失败');
+        }
 	}
 
 }

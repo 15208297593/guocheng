@@ -1,7 +1,8 @@
 /**
  *  配置公共的服务器地址
  */
-var res_host = "http://guochengnews.com";
+// var res_host = "http://guochengnews.com";
+var res_host = "http://192.168.2.2/news";
 
 /**
  * 添加按钮操作
@@ -15,11 +16,40 @@ $("#button-add").click(function(){
  * 提交form表单操作
  */
 $("#singcms-button-submit").click(function(){
+    var editorAttr = $('#editor_singcms').attr('id');
+    var content = $('#editor_singcms').val();
+
+
+    //校验邮箱
+    var emailAttr = $('#email').attr('id');
+    if(emailAttr != null){
+    var email = $('#email').val();
+    var myreg = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/;
+        if(!myreg.test(email)){
+            return dialog.error('请输入有效的邮箱');
+        }
+    }
     var data = $("#singcms-form").serializeArray();
     postData = {};
     $(data).each(function(i){
        postData[this.name] = this.value;
     });
+
+    var textareas=$(document).find('textarea');
+
+    for(var i=0; i<textareas.length;i++){
+        if($(textareas[i]).hasClass('ke-edit-textarea')){
+            continue;
+        }
+        var name=$(textareas[i]).attr('name');
+        var val=$(textareas[i]).val();
+        postData[name]=val.replace(/\n|\r\n/g,"<br>");
+    }
+
+    if(editorAttr != null){
+        content = content.replace(/"/g,'|@|');
+        postData.content = content;
+    }
     console.log(postData);
     // 将获取到的数据post给服务器
     url = SCOPE.save_url;
@@ -35,6 +65,10 @@ $("#singcms-button-submit").click(function(){
         }
     },"JSON");
 });
+/**
+ * ajax删除
+ */
+
 /*
 编辑模型
  */
@@ -49,7 +83,6 @@ $('.singcms-table #singcms-edit').on('click',function(){
  * 删除操作JS
  */
 $('.singcms-table #singcms-delete').on('click',function(){
-    alert(1);
     var id = $(this).attr('attr-id');
     var a = $(this).attr("attr-a");
     var message = $(this).attr("attr-message");
@@ -75,7 +108,6 @@ $('.singcms-table #singcms-delete').on('click',function(){
 
 });
 function todelete(url, data) {
-    alert(333);
     $.post(
         url,
         data,
@@ -177,3 +209,25 @@ $("#singcms-push").click(function(){
 $('#cancel').click(function(){
     window.history.go(-1);
 });
+
+function submitForm(url,jump_url,formName){
+    var ajax_option = {
+        url: url,
+        success: function (result) {
+            result = JSON.parse(result);
+            if (result) {
+                if (result.status == 1) {
+                    //成功
+                    return dialog.success(result.message, jump_url);
+                } else if (result.status == 0) {
+                    // 失败
+                    return dialog.error(result.message);
+                }
+            }
+        },
+        error: function () {
+            return dialog.error(result.message);
+        }
+    };
+    $('#'+ formName).ajaxSubmit(ajax_option);
+}

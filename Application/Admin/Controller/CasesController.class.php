@@ -12,11 +12,13 @@ class CasesController extends IndexController
     		{
     			if($id = $model->add())
     			{
-    				$this->success('添加成功！', U('index?p='.I('get.p')));
+//    				$this->success('添加成功！', U('index?p='.I('get.p')));
+                    return show(1,'添加成功');
     				exit;
     			}
     		}
-    		$this->error($model->getError());
+            return show(0,$model->getError());
+//    		$this->error($model->getError());
     	}
 
 		$this->display();
@@ -31,11 +33,13 @@ class CasesController extends IndexController
     		{
     			if($model->save() !== FALSE)
     			{
-    				$this->success('修改成功！', U('index', array('p' => I('get.p', 1))));
-    				exit;
+//    				$this->success('修改成功！', U('index', array('p' => I('get.p', 1))));
+                    return show(1,'修改成功');
+                    exit;
     			}
     		}
-    		$this->error($model->getError());
+            return show(0,$model->getError());
+//    		$this->error($model->getError());
     	}
     	$model = M('Cases');
     	$data = $model->find($cases_id);
@@ -49,12 +53,14 @@ class CasesController extends IndexController
     	$model = D('Admin/Cases');
     	if($model->delete(I('get.cases_id', 0)) !== FALSE)
     	{
-    		$this->success('删除成功！', U('index', array('p' => I('get.p', 1))));
-    		exit;
+//    		$this->success('删除成功！', U('index', array('p' => I('get.p', 1))));
+            return show(1,'删除成功');
+            exit;
     	}
     	else 
     	{
-    		$this->error($model->getError());
+            return show(0,$model->getError());
+//    			$this->error($model->getError());
     	}
     }
     public function index()

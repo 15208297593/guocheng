@@ -1,0 +1,68 @@
+<include file="Index/header" />
+<body>
+<div id="wrapper">
+
+	<include file="Index/nav"/>
+	<div id="page-wrapper">
+
+		<div class="container-fluid" >
+
+			<!-- Page Heading -->
+
+			<!--导航栏-->
+			<div class="col-lg-12">
+
+				<ol class="breadcrumb">
+					<li>
+						<i class="fa fa-dashboard"></i>  <a href="/admin.php?c=<?php echo $tpName; ?>"><?php echo $navName; ?></a>
+					</li>
+					<li class="active">
+						<i class="fa fa-table"></i><?php echo $navName; ?>列表
+					</li>
+				</ol>
+			</div>
+			<!--导航栏结束-->
+<!-- 列表 -->
+<div class="list-div" id="listDiv">
+	<table cellpadding="3" cellspacing="1" class="table table-bordered table-striped">
+    	<tr>
+            <th >成功案例详情标题</th>
+            <th >成功案例详情内容</th>
+            <th >成功案例详情图片路径</th>
+            <th >成功案例详情时间</th>
+            <th >状态</th>
+			<th width="60">操作</th>
+        </tr>
+		<?php foreach ($data as $k => $v): ?>            
+			<tr class="tron">
+				<td><?php echo $v['title']; ?></td>
+				<td><?php echo $v['content']; ?></td>
+				<td><?php echo $v['pic']; ?></td>
+				<td><?php echo $v['createtime']; ?></td>
+				<td><?php echo $v['status']; ?></td>
+		        <td align="center">
+		        	<a href="<?php echo U('edit?case_content_id='.$v['case_content_id'].'&p='.I('get.p')); ?>" title="编辑">编辑</a> |
+	                <a href="<?php echo U('delete?case_content_id='.$v['case_content_id'].'&p='.I('get.p')); ?>" onclick="return confirm('确定要删除吗？');" title="移除">移除</a> 
+		        </td>
+	        </tr>
+        <?php endforeach; ?> 
+		<?php if(preg_match('/\d/', $page)): ?>  
+        <tr><td align="right" nowrap="true" colspan="99" height="30"><?php echo $page; ?></td></tr> 
+        <?php endif; ?> 
+	</table>
+</div>
+<script>
+</script>
+			<!-- /.row -->
+
+
+
+		</div>
+		<!-- /.container-fluid -->
+
+	</div>
+	<!-- /#page-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+<include file="Index/footer" />

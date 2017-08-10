@@ -71,17 +71,16 @@ class InformationModel extends Model
         //上传文件
         $info = $upload->upload();
         if(!$info){
-            $this->exit($upload->getError());
+            return($upload->getError());
         }else{
             $model = M('Fileinformation');
             foreach ($info as $key=>$val) {
               $fileInfo['createtime'] = time();
               $fileInfo['information_id'] = $information_id;
-              $fileInfo['filename'] = $val['filename'];
-              $fileInfo['filepath'] = './Public/Upload/'.$val['savepath'] . $val['savename'];
+              $fileInfo['filename'] = $val['name'];
+              $fileInfo['filepath'] = './Public/Uploads/'.$val['savepath'] . $val['savename'];
               $model->add($fileInfo);
             }
-            exit;
         }
     }
 	// 修改前
@@ -109,33 +108,34 @@ class InformationModel extends Model
 //
 //			));
 		}
-			$fileModel = M('Fileinformation');
-			$fileModel->where('information_id='.$information_id)->delete();
+//			$fileModel = M('Fileinformation');
+//			$fileModel->where('information_id='.$information_id)->delete();
 	}
 
     //添加后
     protected function _after_update(&$data, $option){
         $information_id = $data['information_id'];
-        $model = M('Fileinformation');
-        $upload = new \Think\Upload();
-        $upload->maxSize   =     3145728 ;// 设置附件上传大小
-//        $upload->exts      =     array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
-        $upload->rootPath  =     './Public/Uploads/'; // 设置附件上传根目录
-        $upload->savePath  =     ''; // 设置附件上传（子）目录
-        //上传文件
-        $info = $upload->upload();
-        if(!$info){
-            $this->exit($upload->getError());
-        }else{
+        if($information_id != null){
             $model = M('Fileinformation');
-            foreach ($info as $key=>$val) {
-                $fileInfo['createtime'] = time();
-                $fileInfo['information_id'] = $information_id;
-                $fileInfo['filename'] = $val['filename'];
-                $fileInfo['filepath'] = './Public/Upload/'.$val['savepath'] . $val['savename'];
-                $model->add($fileInfo);
+            $upload = new \Think\Upload();
+            $upload->maxSize   =     3145728 ;// 设置附件上传大小
+//        $upload->exts      =     array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
+            $upload->rootPath  =     './Public/Uploads/'; // 设置附件上传根目录
+            $upload->savePath  =     ''; // 设置附件上传（子）目录
+            //上传文件
+            $info = $upload->upload();
+            if(!$info){
+                return($upload->getError());
+            }else{
+                $model = M('Fileinformation');
+                foreach ($info as $key=>$val) {
+                    $fileInfo['createtime'] = time();
+                    $fileInfo['information_id'] = $information_id;
+                    $fileInfo['filename'] = $val['name'];
+                    $fileInfo['filepath'] = './Public/Uploads/'.$val['savepath'] . $val['savename'];
+                    $model->add($fileInfo);
+                }
             }
-            exit;
         }
     }
 	// 删除前

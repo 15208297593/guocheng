@@ -42,7 +42,7 @@
             <!-- Page Heading -->
 
 <div class="main-div">
-    <form name="main_form" method="POST" action="__SELF__" enctype="multipart/form-data">
+    <form id="main-form" name="singcms-form" method="POST" action="__SELF__" enctype="multipart/form-data">
         <div class="Information" width="100%">
             <div class="input-group col-lg-6 col-xs-6">
                 <span class="input-group-addon">信息披露标题</span>
@@ -54,6 +54,7 @@
                     <input id="file_upload" type="file" multiple="true">
                     <input id="file_upload_image"  name="pic" type="hidden" multiple="true" value="">
                 </div>
+            <span class="red-tips">※ 请上传 1280*715px 的图片</span>
             </div>
                 <img style="display: none" id="upload_org_code_img" src="" width="150" height="150" alt="图片">
                 <span class="input-group-addon ">上传附件</span>
@@ -67,7 +68,7 @@
 
             <div id="btn-group" class="input-group col-lg-6 col-xs-6" align="center">
 
-                <input type="submit" class="btn btn-default" value=" 确定 " />
+                <input type="button" class="btn btn-default" id="cms-button-submit" value=" 确定 " />
                 <input type="reset" class="btn btn-default" id="cancel" value=" 取消  " />
             </div>
     </form>
@@ -97,11 +98,13 @@
             'set_status_url' : '/admin.php?c=Information&a=setStatus',
             'ajax_upload_swf' : '/Public/js/party/uploadify.swf',
             'ajax_upload_image_url' : '/admin.php?c=image&a=ajaxuploadimage',
+            'jump_url' : '/admin.php?c=Information',
         }
 </script>
 <script src="/Public/js/admin/image.js"></script>
+<script src="/Public/js/admin/jquery.form.min.js"></script>
 <script>
-    var thumb = "";
+    var thumb = "<?php echo $data['pic'];?>";
     if(thumb) {
         $("#upload_org_code_img").show();
     }
@@ -113,6 +116,9 @@
     });
     $('.main-div').on('click','a[data-func="delFileDiv"]',function (event) {
         $(event.currentTarget).parent().remove();
+    });
+    $('#cms-button-submit').click(function(){
+        submitForm(SCOPE.add_url,SCOPE.jump_url,$('#main-form').attr('id'));
     });
 </script>
 

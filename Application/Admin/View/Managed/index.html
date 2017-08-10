@@ -14,7 +14,7 @@
 
 				<ol class="breadcrumb">
 					<li>
-						<i class="fa fa-dashboard"></i>  <a href="/admin.php?c=Managed"><?php echo $navName; ?></a>
+						<i class="fa fa-dashboard"></i>  <a href="/admin.php?c=Managed">旗下管理基金</a>
 					</li>
 					<li class="active">
 						<i class="fa fa-table"></i><?php echo $navName; ?>列表
@@ -29,29 +29,29 @@
 			<!--添加按钮结束-->
 <!-- 列表 -->
 <div class="list-div" id="listDiv">
-	<table cellpadding="3" cellspacing="1" class="table table-bordered table-striped">
+	<table cellpadding="3" cellspacing="1" class="table table-bordered table-striped singcms-table">
     	<tr>
             <th >旗下管理基金id</th>
             <th >标题</th>
             <th >创建时间</th>
             <th >管理基金详情</th>
-            <th >状态</th>
-            <th >备注</th>
+            <!--<th >状态</th>-->
+            <!--<th >备注</th>-->
 			<th width="90">操作</th>
         </tr>
 		<?php foreach ($data as $k => $v): ?>            
 			<tr class="tron">
 				<td><?php echo $v['managed_id']; ?></td>
 				<td><?php echo $v['title']; ?></td>
-				<td><?php echo $v['createtime']; ?></td>
+				<td><?php echo date('Y-m-d H:i:s',$v['createtime']); ?></td>
 				<td><?php echo $v['content']; ?></td>
-				<td><?php echo $v['status']; ?></td>
-				<td><?php echo $v['remark']; ?></td>
+				<!--<td><?php echo $v['status']; ?></td>-->
+				<!--<td><?php echo $v['remark']; ?></td>-->
 		        <td align="center">
-		        	<a href="<?php echo U('edit?managed_id='.$v['managed_id'].'&p='.I('get.p')); ?>" title="编辑">
-						<span class="sing_cursor glyphicon glyphicon-edit" aria-hidden="true" id="singcms-edit" attr-id="22"></span>
+					<a href="<?php echo U('edit?managed_id='.$v['managed_id']); ?>" title="编辑">
+					<span class="sing_cursor glyphicon glyphicon-edit" aria-hidden="true" id="singcms-edit"></span>
 					</a>
-	                <a href="<?php echo U('delete?managed_id='.$v['managed_id'].'&p='.I('get.p')); ?>" onclick="return confirm('确定要删除吗？');" title="移除">
+					<a href="javascript:void(0)" id="singcms-delete" attr-id="<?php echo $v['managed_id'] ; ?>" attr-message="移除">
 						<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
 					</a>
 		        </td>

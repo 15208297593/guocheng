@@ -12,11 +12,13 @@ class ManagedController extends IndexController
     		{
     			if($id = $model->add())
     			{
-    				$this->success('添加成功！', U('index?p='.I('get.p')));
-    				exit;
+//    				$this->success('添加成功！', U('index?p='.I('get.p')));
+                    return show(1, '操作成功');
+                    exit;
     			}
     		}
-    		$this->error($model->getError());
+//    		$this->error($model->getError());
+    		return show(0,$model->getError());
     	}
 
 		$this->display();
@@ -31,11 +33,13 @@ class ManagedController extends IndexController
     		{
     			if($model->save() !== FALSE)
     			{
-    				$this->success('修改成功！', U('index', array('p' => I('get.p', 1))));
-    				exit;
+//    				$this->success('修改成功！', U('index', array('p' => I('get.p', 1))));
+                    return show(1, '修改成功');
+                    exit;
     			}
     		}
-    		$this->error($model->getError());
+//    		$this->error($model->getError());
+            return show(0,$model->getError());
     	}
     	$model = M('Managed');
     	$data = $model->find($managed_id);
@@ -49,12 +53,14 @@ class ManagedController extends IndexController
     	$model = D('Admin/Managed');
     	if($model->delete(I('get.managed_id', 0)) !== FALSE)
     	{
-    		$this->success('删除成功！', U('index', array('p' => I('get.p', 1))));
-    		exit;
+//    		$this->success('删除成功！', U('index', array('p' => I('get.p', 1))));
+            return show(1, '删除成功');
+            exit;
     	}
     	else 
     	{
-    		$this->error($model->getError());
+//    		$this->error($model->getError());
+            return show(0,$model->getError());
     	}
     }
     public function index()

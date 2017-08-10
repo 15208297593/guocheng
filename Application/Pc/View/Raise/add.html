@@ -1,0 +1,197 @@
+<include file="Index/header" />
+<style>
+    .label{
+        color:black;
+    }
+    .Raise>div{
+        margin-bottom: 20px;
+    }
+    .Raise{
+        margin-bottom:50px;
+    }
+    .Raise>div>textarea{
+        height:500px;
+        width:800px;
+    }
+    #btn-group>input{
+        margin: 10px;
+    }
+
+</style>
+<body>
+<div id="wrapper">
+
+    <include file="Index/nav"/>
+    <div id="page-wrapper">
+
+        <div class="container-fluid" >
+            <ol class="breadcrumb">
+                <li>
+                    <i class="fa fa-dashboard"></i>  <a href="/admin.php?c=Raise"></a>
+                </li>
+                <li class="active">
+                    <i class="fa fa-table"></i>添加
+                </li>
+            </ol>
+            <!-- Page Heading -->
+
+<div class="main-div">
+    <form id="main-form" name="main_form" method="POST" action="__SELF__" enctype="multipart/form-data">
+        <div class="Raise" width="100%">
+                    <input  type="hidden" name="raise_id" value="" />
+            <div class="input-group col-lg-6 col-xs-6">
+                <span class="input-group-addon">募集基金标题</span>
+                    <input  type="text" name="title" value="" />
+            </div>
+            <div class="input-group col-lg-6 col-xs-6">
+                <span class="input-group-addon">募集基金详情</span>
+                	<textarea id="content" name="content"></textarea>
+            </div>
+            <div class="input-group col-lg-6 col-xs-6">
+                <span class="input-group-addon" id="thumb"><?php echo $navName; ?>图片</span>
+                <div class="col-sm-5">
+                    <input id="file_upload" type="file" multiple="true">
+                    <input id="file_upload_image"  name="pic" type="hidden" multiple="true" value="">
+                </div>
+            </div>
+                <img style="display: none" id="upload_org_code_img" src="<?PHP echo $v['pic']; ?>" width="150" height="150" alt="图片">
+            <span class="input-group-addon ">上传附件</span>
+            <div id="file_list">
+                <?php foreach($files as $k=>$v):?>
+                <?php if($k == 0 ):?>
+                <div class="input-group col-lg-6 col-xs-6 file-div">
+                    <a href="javascript:void(0);" data-func="addFileDiv" data-id="<?php echo $v['fileraise_id'] ?>">[+]</a>
+                    <input  type="file" name="files[]" value="<?php echo $v['filepath']?>"  />
+                    <span><?php echo $v['filename']?></span>
+                </div>
+                <?php else:?>
+                <div class="input-group col-lg-6 col-xs-6 file-div">
+                    <a href="javascript:void(0);" data-func="delFileDiv" data-id="<?php echo $v['fileraise_id'] ?>">[-]</a>
+                    <input  type="file" name="files[]" value="<?php echo $v['filepath']?>"  />
+                    <span><?php echo $v['filename']?></span>
+                </div>
+                <?php endif?>
+                <?php endforeach?>
+
+                <!--<?PHP print_r($files.length)?>-->
+
+                <?php if($files==null||count($files)== 0): ?>
+                <div class="input-group col-lg-6 col-xs-6 file-div">
+                    <a href="javascript:void(0);" data-func="addFileDiv" >[+]</a>
+                    <input  type="file" name="files[]"  value=""/>
+                    <span></span>
+                </div>
+                <?PHP endif ?>
+            </div>
+        </div>
+
+            <div id="btn-group" class="input-group col-lg-6 col-xs-6" align="center">
+
+                <input type="button" class="btn btn-default" id="cms-button-submit" value=" 确定 " />
+                <input type="reset" class="btn btn-default" id="cancel" value=" 取消  " />
+            </div>
+    </form>
+</div>
+<script>
+
+</script>
+            <script id="file_template" type="text/html">
+                <div class="input-group col-lg-6 col-xs-6 file-div">
+                    <a  href="javascript:void(0);" data-func="delFileDiv">[-]</a>
+                    <input  type="file" name="files[]" value=""  />
+                </div>
+            </script>
+            <!-- /.row -->
+
+
+
+        </div>
+        <!-- /.container-fluid -->
+
+    </div>
+    <!-- /#page-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+<script>
+        var SCOPE = {
+            'edit_url' : '/admin.php?c=Raise&a=edit',
+            'add_url' : '/admin.php?c=Raise&a=add',
+            'set_status_url' : '/admin.php?c=Raise&a=setStatus',
+            'ajax_upload_swf' : '/Public/js/party/uploadify.swf',
+            'ajax_upload_image_url' : '/admin.php?c=image&a=ajaxuploadimage',
+            'ajax_delete_url' : '/admin.php?c=common&a=ajaxDelete',
+            'jump_url' : '/admin.php?c=Raise',
+            'model_name' : 'fileraise',
+        }
+</script>
+<script src="/Public/js/admin/image.js"></script>
+<script src="/Public/js/admin/jquery.form.min.js"></script>
+<script>
+    var thumb = "<?php echo $v['pic'] ?>";
+    if(thumb) {
+        $("#upload_org_code_img").show();
+    }
+
+    $('.main-div').on('click','a[data-func="addFileDiv"]',function () {
+        var html=$('#file_template').html();
+        $('#file_list').append(html);
+    });
+    $('.main-div').on('click','a[data-func="delFileDiv"]',function (event) {
+        var id = $(event.currentTarget).attr('data-id');
+        if(id){
+            var modelName = SCOPE.model_name;
+            var oldPath=$(event.currentTarget).next().attr('value');
+            ajaxDelete(id,SCOPE.ajax_delete_url,modelName,oldPath,function () {
+                $(event.currentTarget).parent().remove();
+            },true);
+        }else {
+            $(event.currentTarget).parent().remove();
+        }
+
+    });
+
+    $('.main-div').on('click','input[name="files[]"]',function (event) {
+        var id = $(event.currentTarget).prev().attr('data-id');
+        if(id){
+            var modelName = SCOPE.model_name;
+            var oldPath=$(event.currentTarget).attr('value');
+            ajaxDelete(id,SCOPE.ajax_delete_url,modelName,oldPath,function () {
+                $(event.currentTarget).next().remove();
+            },false);
+        }else {
+            $(event.currentTarget).next().remove();
+        }
+
+    });
+    function ajaxDelete(id,url,modelName,oldFile,completion,openDialog){
+        var postData={'fileId':id,'modelName':modelName,'oldFile':oldFile};
+        $.post(url,postData,function(result){
+            console.log(result);
+            if(result.status == 1) {
+                //成功
+                completion();
+                var file_lenth=  $('.main-div').find('.file-div').length;
+                if(file_lenth==0){
+                    var file_template=$('#file_template').html();
+                    $('#file_list').append(file_template);
+                }
+                $($('.main-div .file-div>a')[0]).attr('data-func','addFileDiv');
+                $($('.main-div .file-div>a')[0]).text('[+]');
+                if(openDialog){
+                    return dialog.toconfirm(result.message);
+                }
+
+            }else if(result.status == 0) {
+                // 失败
+                if(openDialog){
+                    return dialog.error(result.message);
+                }
+            }
+        },"JSON");
+    }
+    $('#cms-button-submit').click(function(){
+        submitForm(SCOPE.add_url,SCOPE.jump_url,$('#main-form').attr('id'));
+    });
+</script>
+<include file="Index/footer" />

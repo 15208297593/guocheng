@@ -1,0 +1,101 @@
+<include file="Index/header" />
+<style>
+	.label{
+		color:black;
+	}
+	.Managed>div{
+		margin-bottom: 20px;
+	}
+	.Managed{
+		margin-bottom:50px;
+	}
+	.Managed>div>textarea{
+		height:500px;
+		width:800px;
+	}
+	#btn-group>input{
+		margin: 10px;
+	}
+
+</style>
+<body>
+<div id="wrapper">
+
+	<include file="Index/nav"/>
+	<div id="page-wrapper">
+
+		<div class="container-fluid" >
+			<ol class="breadcrumb">
+				<li>
+					<i class="fa fa-dashboard"></i>  <a href="/admin.php?c=Managed"></a>
+				</li>
+				<li class="active">
+					<i class="fa fa-table"></i>编辑
+				</li>
+			</ol>
+			<!-- Page Heading -->
+
+<div class="main-div">
+    <form id="singcms-form" name="main-form" method="POST" action="__SELF__" enctype="multipart/form-data" >
+    	<input type="hidden" name="managed_id" value="<?php echo $data['managed_id']; ?>" />
+        <div class="Managed" width="100%">
+                    <input  type="hidden" name="managed_id" value="<?php echo $data['managed_id']; ?>" />
+			<div class="input-group col-lg-6 col-xs-6">
+				<span class="input-group-addon">标题</span>
+                    <input  type="text" name="title" value="<?php echo $data['title']; ?>" />
+			</div>
+			<div class="input-group col-lg-6 col-xs-6">
+				<span class="input-group-addon">管理基金详情</span>
+                	<textarea id="content" name="content"><?php echo $data['content']; ?></textarea>
+			</div>
+			<!--<div class="input-group col-lg-6 col-xs-6">-->
+				<!--<span class="input-group-addon" id="thumb">图片</span>-->
+				<!--<div class="col-sm-5">-->
+					<!--<input id="file_upload" type="file" multiple="true">-->
+					<!--<input id="file_upload_image"  name="pic" type="hidden" multiple="true" value="">-->
+				<!--</div>-->
+        <!--</div>-->
+				<img style="display: none" id="upload_org_code_img" src="" width="150" height="150" alt="图片">
+			<div id="btn-group" class="input-group col-lg-6 col-xs-6" align="center">
+
+				<input type="button" class="btn btn-default" id="singcms-button-submit" value=" 确定 " />
+				<input type="reset" class="btn btn-default" id="cancel" value=" 取消  " />
+			</div>
+    </form>
+</div>
+<script>
+
+</script>
+			<!-- /.row -->
+
+
+
+		</div>
+		<!-- /.container-fluid -->
+
+	</div>
+	<!-- /#page-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+<script>
+        var SCOPE = {
+            'edit_url' : '/admin.php?c=Managed&a=edit',
+            'add_url' : '/admin.php?c=Managed&a=add',
+            'set_status_url' : '/admin.php?c=Managed&a=setStatus',
+            'ajax_upload_swf' : '/Public/js/party/uploadify.swf',
+            'ajax_upload_image_url' : '/admin.php?c=image&a=ajaxuploadimage',
+            'jump_url' : '/admin.php?c=Managed',
+//            'sing_news_view_url' : '/index.php?c=view',
+//            'listorder_url' : '/admin.php?c=content&a=listorder',
+//            'push_url' : '/admin.php?c=content&a=push',
+        }
+</script>
+<script src="/Public/js/admin/image.js"></script>
+<script>
+    var thumb = "";
+    if(thumb) {
+        $("#upload_org_code_img").show();
+    }
+</script>
+<include file="Index/footer" />

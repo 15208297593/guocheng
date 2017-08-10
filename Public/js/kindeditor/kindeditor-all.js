@@ -3184,7 +3184,7 @@ _extend(KCmd, {
 	insertimage : function(url, title, width, height, border, align) {
 		title = _undef(title, '');
 		border = _undef(border, 0);
-		var html = '<img src="' + _escape(url) + '" data-ke-src="' + _escape(url) + '" ';
+		var html = '<img width="100%" src="'+res_host + _escape(url) + '" data-ke-src="'+res_host + _escape(url) + '" ';
 		if (width) {
 			html += 'width="' + _escape(width) + '" ';
 		}
@@ -6969,7 +6969,7 @@ KindEditor.plugin('flash', function(K) {
 KindEditor.plugin('image', function(K) {
 	var self = this, name = 'image',
 		allowImageUpload = K.undef(self.allowImageUpload, true),
-		allowImageRemote = K.undef(self.allowImageRemote, true),
+		allowImageRemote = K.undef(self.allowImageRemote, false), //是否允许网络图片
 		formatUploadUrl = K.undef(self.formatUploadUrl, true),
 		allowFileManager = K.undef(self.allowFileManager, false),
 		uploadJson = K.undef(self.uploadJson, self.basePath + 'php/upload_json.php'),
@@ -7949,7 +7949,7 @@ K.extend(KSWFUpload, {
 					showError(itemDiv, K.DEBUG ? data.message : self.options.errorMessage);
 					return;
 				}
-				file.url = data.url;
+				file.url = res_host+data.url;
 				K('.ke-img', itemDiv).attr('src', file.url).attr('data-status', file.filestatus).data('data', data);
 				K('.ke-status > div', itemDiv).hide();
 			}
@@ -8116,9 +8116,10 @@ KindEditor.plugin('multiimage', function(K) {
 				}
 				K.each(urlList, function(i, data) {
 					if (self.afterUpload) {
-						self.afterUpload.call(self, data.url, data, 'multiimage');
+						self.afterUpload.call(self, res_host+data.url, data, 'multiimage');
 					}
-					self.exec('insertimage', data.url, data.title, data.width, data.height, data.border, data.align);
+					// self.exec('insertimage', data.url, data.title, data.width, data.height, data.border, data.align);
+					self.exec('insertimage', data.url, data.title, '100%', 'auto', data.border, data.align);
 				});
 				// Bugfix: [Firefox] 上传图片后，总是出现正在加载的样式，需要延迟执行hideDialog
 				setTimeout(function() {

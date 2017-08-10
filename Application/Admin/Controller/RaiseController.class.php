@@ -12,11 +12,13 @@ class RaiseController extends IndexController
     		{
     			if($id = $model->add())
     			{
-    				$this->success('添加成功！', U('index?p='.I('get.p')));
-    				exit;
+//    				$this->success('添加成功！', U('index?p='.I('get.p')));
+    				return show(1,'添加成功');
+                    exit;
     			}
     		}
-    		$this->error($model->getError());
+//    		$this->error($model->getError());
+            return show(0,$model->getError());
     	}
 
 		$this->display();
@@ -31,16 +33,21 @@ class RaiseController extends IndexController
     		{
     			if($model->save() !== FALSE)
     			{
-    				$this->success('修改成功！', U('index', array('p' => I('get.p', 1))));
-    				exit;
+//    				$this->success('修改成功！', U('index', array('p' => I('get.p', 1))));
+                    return show(1,'修改成功');
+                    exit;
     			}
     		}
-    		$this->error($model->getError());
+//    		$this->error($model->getError());
+            return show(0,$model->getError());
     	}
     	$model = M('Raise');
+        $fileModel = M('Fileraise');
+        $files = $fileModel->where('raise_id='.$raise_id)->select();
     	$data = $model->find($raise_id);
     	$data = $model->find($raise_id);
     	$this->assign('data', $data);
+    	$this->assign('files',$files);
 
 		$this->display();
     }
@@ -49,12 +56,14 @@ class RaiseController extends IndexController
     	$model = D('Admin/Raise');
     	if($model->delete(I('get.raise_id', 0)) !== FALSE)
     	{
-    		$this->success('删除成功！', U('index', array('p' => I('get.p', 1))));
-    		exit;
+//    		$this->success('删除成功！', U('index', array('p' => I('get.p', 1))));
+            return show(1,'删除成功');
+            exit;
     	}
     	else 
     	{
-    		$this->error($model->getError());
+//    		$this->error($model->getError());
+            return show(0,$model->getError());
     	}
     }
     public function index()

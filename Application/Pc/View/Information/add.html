@@ -1,0 +1,124 @@
+<include file="Index/header" />
+<style>
+    .label{
+        color:black;
+    }
+    .Information>div{
+        margin-bottom: 20px;
+    }
+    .Information{
+        margin-bottom:50px;
+    }
+    .Information>div>textarea{
+        height:150px;
+    }
+    #btn-group>input{
+        margin: 10px;
+    }
+    .file-div>a{
+        font-size: 20px;
+    }
+    .file-div>input{
+        display: inline-block;
+        margin-left: 5px;
+    }
+
+</style>
+<body>
+<div id="wrapper">
+
+    <include file="Index/nav"/>
+    <div id="page-wrapper">
+
+        <div class="container-fluid" >
+            <ol class="breadcrumb">
+                <li>
+                    <i class="fa fa-dashboard"></i>  <a href="/admin.php?c=Information">信息披露</a>
+                </li>
+                <li class="active">
+                    <i class="fa fa-table"></i>添加
+                </li>
+            </ol>
+            <!-- Page Heading -->
+
+<div class="main-div">
+    <form id="main-form" name="singcms-form" method="POST" action="__SELF__" enctype="multipart/form-data">
+        <div class="Information" width="100%">
+            <div class="input-group col-lg-6 col-xs-6">
+                <span class="input-group-addon">信息披露标题</span>
+                    <input  type="text" name="title" value="" />
+            </div>
+            <div class="input-group col-lg-6 col-xs-6">
+                <span class="input-group-addon" id="thumb"><?php echo $navName; ?>图片</span>
+                <div class="col-sm-5">
+                    <input id="file_upload" type="file" multiple="true">
+                    <input id="file_upload_image"  name="pic" type="hidden" multiple="true" value="">
+                </div>
+            </div>
+                <img style="display: none" id="upload_org_code_img" src="" width="150" height="150" alt="图片">
+                <span class="input-group-addon ">上传附件</span>
+            <div id="file_list">
+            <div class="input-group col-lg-6 col-xs-6 file-div">
+                <a href="javascript:void(0);" data-func="addFileDiv">[+]</a>
+                <input  type="file" name="files[]" value=""  />
+            </div>
+            </div>
+        </div>
+
+            <div id="btn-group" class="input-group col-lg-6 col-xs-6" align="center">
+
+                <input type="button" class="btn btn-default" id="cms-button-submit" value=" 确定 " />
+                <input type="reset" class="btn btn-default" id="cancel" value=" 取消  " />
+            </div>
+    </form>
+</div>
+<script id="file_template" type="text/html">
+    <div class="input-group col-lg-6 col-xs-6 file-div">
+        <a  href="javascript:void(0);" data-func="delFileDiv">[-]</a>
+        <input  type="file" name="files[]" value=""  />
+    </div>
+</script>
+            <!-- /.row -->
+
+
+
+        </div>
+        <!-- /.container-fluid -->
+
+    </div>
+    <!-- /#page-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+<script>
+        var SCOPE = {
+            'edit_url' : '/admin.php?c=Information&a=edit',
+            'add_url' : '/admin.php?c=Information&a=add',
+            'set_status_url' : '/admin.php?c=Information&a=setStatus',
+            'ajax_upload_swf' : '/Public/js/party/uploadify.swf',
+            'ajax_upload_image_url' : '/admin.php?c=image&a=ajaxuploadimage',
+            'jump_url' : '/admin.php?c=Information',
+        }
+</script>
+<script src="/Public/js/admin/image.js"></script>
+<script src="/Public/js/admin/jquery.form.min.js"></script>
+<script>
+    var thumb = "<?php echo $data['pic'];?>";
+    if(thumb) {
+        $("#upload_org_code_img").show();
+    }
+
+
+    $('.main-div').on('click','a[data-func="addFileDiv"]',function () {
+       var html=$('#file_template').html();
+        $('#file_list').append(html);
+    });
+    $('.main-div').on('click','a[data-func="delFileDiv"]',function (event) {
+        $(event.currentTarget).parent().remove();
+    });
+    $('#cms-button-submit').click(function(){
+        submitForm(SCOPE.add_url,SCOPE.jump_url,$('#main-form').attr('id'));
+    });
+</script>
+
+<include file="Index/footer" />

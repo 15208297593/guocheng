@@ -3,8 +3,8 @@ namespace Admin\Model;
 use Think\Model;
 class CasesModel extends Model 
 {
-	protected $insertFields = array('title','createtime','content','hovertitle','hoverone','hovertwo','status','remark');
-	protected $updateFields = array('cases_id','title','createtime','content','hovertitle','hoverone','hovertwo','status','remark');
+	protected $insertFields = array('title','createtime','content','hovertitle','hoverone','hovertwo','status','remark','pic','abstract');
+	protected $updateFields = array('cases_id','title','createtime','content','hovertitle','hoverone','hovertwo','status','remark','pic','abstract');
 	protected $_validate = array(
 		array('title', '1,64', '成功案例标题的值最长不能超过 64 个字符！', 2, 'length', 3),
 		array('createtime', '1,25', '创建时间的值最长不能超过 25 个字符！', 2, 'length', 3),
@@ -30,8 +30,8 @@ class CasesModel extends Model
 			$where['hoverone'] = array('like', "%$hoverone%");
 		if($hovertwo = I('get.hovertwo'))
 			$where['hovertwo'] = array('like', "%$hovertwo%");
-		if($status = I('get.status'))
-			$where['status'] = array('eq', $status);
+//		if($status = I('get.status'))
+			$where['status'] = array('eq', 1);
 		if($remark = I('get.remark'))
 			$where['remark'] = array('like', "%$remark%");
 		/************************************* 翻页 ****************************************/

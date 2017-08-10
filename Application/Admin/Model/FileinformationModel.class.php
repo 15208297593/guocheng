@@ -58,6 +58,13 @@ class FileinformationModel extends Model
 			return FALSE;
 		}
 	}
+    // 删除后
+    protected function _after_delete(&$data,$option)
+    {
+        deleteImage(array(
+            I('post.oldFile'),
+        ));
+    }
 	/************************************ 其他方法 ********************************************/
     public function getFileinformations($data,$page,$pageSize=10) {
     $data['status'] = array('neq',-1);

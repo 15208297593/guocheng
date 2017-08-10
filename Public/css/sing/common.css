@@ -38,3 +38,18 @@
 }
 .sing_cursor{cursor:pointer}
 .sing_green{color:#308014}
+.red-tips{
+    color:red;
+    vertical-align: middle;
+    margin-top:12px;
+    display: inline-block;
+}
+.red-tips-pic{
+    color:red;
+    vertical-align: middle;
+    margin-top:12px;
+    display: inline-block;
+}
+#file_upload{
+    margin-top: 10px;
+}

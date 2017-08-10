@@ -49,7 +49,7 @@ class MenuController extends CommonController {
          * 分页操作逻辑
          */
         $page = $_REQUEST['p'] ? $_REQUEST['p'] : 1;
-        $pageSize = $_REQUEST['pageSize'] ? $_REQUEST['pageSize'] : 3;
+        $pageSize = $_REQUEST['pageSize'] ? $_REQUEST['pageSize'] : 10;
         $menus = D("Menu")->getMenus($data,$page,$pageSize);
         $menusCount = D("Menu")->getMenusCount($data);
 

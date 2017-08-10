@@ -37,6 +37,17 @@ return array(
 			'type' => 'html',
 			'default' => '',
 		),
+		'pic' => array(
+			'text' => '图片',
+			'type' => 'file',
+			'thumbs' => array(
+				array(350, 350, 2),
+				array(150, 150, 2),
+				array(50, 50, 2),
+			),
+			'save_fields' => array('pic', 'big_pic', 'mid_pic', 'sm_pic'),
+			'default' => '',
+		),
 		'createtime' => array(
 			'text' => '创建时间',
 			'type' => 'text',

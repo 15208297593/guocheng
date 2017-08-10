@@ -36,7 +36,7 @@ class NewsContentModel extends Model {
         if(isset($data['content']) && $data['content']) {
             $data['content'] = htmlspecialchars($data['content']);
         }
-
+        $data['update_time'] = time();
         return $this->_db->where('news_id='.$id)->save($data);
     }
 

@@ -1,0 +1,102 @@
+<include file="Index/header" />
+<style>
+    .label{
+        color:black;
+    }
+    .Hire>div{
+        margin-bottom: 20px;
+    }
+    .Hire{
+        margin-bottom:50px;
+    }
+    .Hire>div>textarea{
+        height:240px;
+        width:800px;
+    }
+    #btn-group>input{
+        margin: 10px;
+    }
+
+</style>
+<body>
+<div id="wrapper">
+
+    <include file="Index/nav"/>
+    <div id="page-wrapper">
+
+        <div class="container-fluid" >
+            <ol class="breadcrumb">
+                <li>
+                    <i class="fa fa-dashboard"></i>  <a href="/admin.php?c=Hire"></a>
+                </li>
+                <li class="active">
+                    <i class="fa fa-table"></i>添加
+                </li>
+            </ol>
+            <!-- Page Heading -->
+
+<div class="main-div">
+    <form id="singcms-form" name="main_form" method="POST" action="__SELF__" enctype="multipart/form-data">
+        <div class="Hire" width="100%">
+            <div class="input-group col-lg-6 col-xs-6">
+                <span class="input-group-addon">职位</span>
+                    <input  type="text" name="job" value="" />
+            </div>
+            <div class="input-group col-lg-6 col-xs-6">
+                <span class="input-group-addon">岗位职责</span>
+                	<textarea id="duty" name="duty"></textarea>
+            </div>
+            <div class="input-group col-lg-6 col-xs-6">
+                <span class="input-group-addon">岗位要求</span>
+                	<textarea id="requirement" name="requirement"></textarea>
+            </div>
+            <!--<div class="input-group col-lg-6 col-xs-6">-->
+                <!--<span class="input-group-addon" id="thumb">图片</span>-->
+                <!--<div class="col-sm-5">-->
+                    <!--<input id="file_upload" type="file" multiple="true">-->
+                    <!--<input id="file_upload_image"  name="pic" type="hidden" multiple="true" value="">-->
+                <!--</div>-->
+            <!--</div>-->
+                <!--<img style="display: none" id="upload_org_code_img" src="" width="150" height="150" alt="图片">-->
+        </div>
+
+            <div id="btn-group" class="input-group col-lg-6 col-xs-6" align="center">
+
+                <input type="button" class="btn btn-default" id="singcms-button-submit" value=" 确定 " />
+                <input type="reset" class="btn btn-default" id="cancel" value=" 取消  " />
+            </div>
+    </form>
+</div>
+<script>
+
+</script>
+            <!-- /.row -->
+
+
+
+        </div>
+        <!-- /.container-fluid -->
+
+    </div>
+    <!-- /#page-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+<script>
+        var SCOPE = {
+            'edit_url' : '/admin.php?c=Hire&a=edit',
+            'add_url' : '/admin.php?c=Hire&a=add',
+            'set_status_url' : '/admin.php?c=Hire&a=setStatus',
+            'ajax_upload_swf' : '/Public/js/party/uploadify.swf',
+            'ajax_upload_image_url' : '/admin.php?c=image&a=ajaxuploadimage',
+            'jump_url' : '/admin.php?c=Hire',
+        }
+</script>
+<script src="/Public/js/admin/image.js"></script>
+<script>
+    var thumb = "";
+    if(thumb) {
+        $("#upload_org_code_img").show();
+    }
+</script>
+<include file="Index/footer" />

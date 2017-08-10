@@ -14,7 +14,7 @@
 
 				<ol class="breadcrumb">
 					<li>
-						<i class="fa fa-dashboard"></i>  <a href="/admin.php?c=Information"><?php echo $navName; ?></a>
+						<i class="fa fa-dashboard"></i>  <a href="/admin.php?c=Information">信息披露</a>
 					</li>
 					<li class="active">
 						<i class="fa fa-table"></i>列表
@@ -35,8 +35,8 @@
             <th >信息披露标题</th>
             <th >图片</th>
             <th >创建时间</th>
-            <th >状态</th>
-            <th >备注</th>
+            <!--<th >状态</th>-->
+            <!--<th >备注</th>-->
 			<th width="90">操作</th>
         </tr>
 		<?php foreach ($data as $k => $v): ?>            
@@ -44,12 +44,13 @@
 				<td><?php echo $v['information_id']; ?></td>
 				<td><?php echo $v['title']; ?></td>
 				<td><?php echo $v['pic']; ?></td>
-				<td><?php echo $v['createtime']; ?></td>
-				<td><?php echo $v['status']; ?></td>
-				<td><?php echo $v['remark']; ?></td>
+				<td><?php echo date('Y-m-d H:i:s',$v['createtime']); ?></td>
+				<!--<td><?php echo $v['status']; ?></td>-->
+				<!--<td><?php echo $v['remark']; ?></td>-->
 		        <td align="center">
-		        	<a href="<?php echo U('edit?information_id='.$v['information_id'].'&p='.I('get.p')); ?>" title="编辑">
-						<span class="sing_cursor glyphicon glyphicon-edit" aria-hidden="true" id="singcms-edit" attr-id="22"></span>
+		        	<!--<a href="<?php echo U('edit?information_id='.$v['information_id'].'&p='.I('get.p')); ?>" title="编辑">-->
+		        	<a href="<?php echo U('edit?information_id='.$v['information_id']); ?>" title="编辑">
+						<span class="sing_cursor glyphicon glyphicon-edit" aria-hidden="true" id="singcms-edit"></span>
 					</a>
 	                <!--<a href="<?php echo U('delete?information_id='.$v['information_id'].'&p='.I('get.p')); ?>" onclick="return confirm('确定要删除吗？');" title="移除">-->
 						<!--<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>-->

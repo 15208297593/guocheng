@@ -1,4 +1,26 @@
 <include file="Index/header" />
+<style>
+	.label{
+		color:black;
+	}
+	.Hire>div{
+		margin-bottom: 20px;
+	}
+	.Hire{
+		margin-bottom:50px;
+	}
+	.Hire>div>textarea{
+		height:240px;
+		width: 800px;
+	}
+	#btn-group>input{
+		margin: 10px;
+	}
+	.red-tips{
+		margin: 0 0 0 10px;
+	}
+
+</style>
 <body>
 <div id="wrapper">
 
@@ -6,76 +28,65 @@
 	<div id="page-wrapper">
 
 		<div class="container-fluid" >
-
+			<ol class="breadcrumb">
+				<li>
+					<i class="fa fa-dashboard"></i>  <a href="/admin.php?c=Hire">招贤纳士</a>
+				</li>
+				<li class="active">
+					<i class="fa fa-table"></i>编辑
+				</li>
+			</ol>
 			<!-- Page Heading -->
 
 <div class="main-div">
-    <form name="main_form" method="POST" action="__SELF__" enctype="multipart/form-data" >
+    <form id="singcms-form" name="main-form" method="POST" action="__SELF__" enctype="multipart/form-data" >
     	<input type="hidden" name="hire_id" value="<?php echo $data['hire_id']; ?>" />
-        <table cellspacing="1" cellpadding="3" width="100%">
-            <tr>
-                <td class="label">招聘id：</td>
-                <td>
-                    <input  type="text" name="hire_id" value="<?php echo $data['hire_id']; ?>" />
-                </td>
-            </tr>
-            <tr>
-                <td class="label">职位：</td>
-                <td>
+		<input type="hidden" name="old_pic" value="<?php echo $data['pic']; ?>" />
+		<input type="hidden" name="old_big_pic" value="<?php echo $data['big_pic']; ?>" />
+		<input type="hidden" name="old_mid_pic" value="<?php echo $data['mid_pic']; ?>" />
+		<input type="hidden" name="old_sm_pic" value="<?php echo $data['sm_pic']; ?>" />
+        <div class="Hire" width="100%">
+                    <input  type="hidden" name="hire_id" value="<?php echo $data['hire_id']; ?>" />
+			<div class="input-group ">
+				<span class="input-group-addon">职位</span>
                     <input  type="text" name="job" value="<?php echo $data['job']; ?>" />
-                </td>
-            </tr>
-            <tr>
-                <td class="label">岗位职责：</td>
-                <td>
-                	<textarea id="duty" name="duty"><?php echo $data['duty']; ?></textarea>
-                </td>
-            </tr>
-            <tr>
-                <td class="label">岗位要求：</td>
-                <td>
-                	<textarea id="requirement" name="requirement"><?php echo $data['requirement']; ?></textarea>
-                </td>
-            </tr>
-            <tr>
-                <td class="label">创建时间：</td>
-                <td>
-                    <input id="createtime" type="text" name="createtime" value="<?php echo $data['createtime']; ?>" />
-                </td>
-            </tr>
-            <tr>
-                <td class="label">状态：</td>
-                <td>
-                    <input  type="text" name="status" value="<?php echo $data['status']; ?>" />
-                </td>
-            </tr>
-            <tr>
-                <td class="label">备注：</td>
-                <td>
-                    <input  type="text" name="remark" value="<?php echo $data['remark']; ?>" />
-                </td>
-            </tr>
-            <tr>
-                <td colspan="99" align="center">
-                    <input type="submit" class="button" value=" 确定 " />
-                    <input type="reset" class="button" value=" 重置 " />
-                </td>
-            </tr>
-        </table>
+				<span class="red-tips">※ 请填写招聘职位</span>
+			</div>
+			<div class="input-group col-lg-6 col-xs-6">
+				<span class="input-group-addon">岗位职责</span>
+                	<textarea id="duty" name="duty" maxlength="288"><?php echo $data['duty']; ?></textarea>
+			</div>
+			<div class="input-group col-lg-6 col-xs-6">
+				<span class="input-group-addon">岗位要求</span>
+                	<textarea id="requirement" name="requirement" class="col-lg-6 col-xs-6" maxlength="270"><?php echo $data['requirement']; ?></textarea>
+			</div>
+			<div class="input-group col-lg-6 col-xs-6">
+			<span class="input-group-addon">邮箱</span>
+			<input  type="text" class="col-lg-6 col-xs-6" id="email" name="email" value="<?php echo $data['email']; ?>" maxlength="64"/>
+			<span class="red-tips">※ 请填写接收应聘者简历的邮箱</span>
+			</div>
+			<!--<div class="input-group col-lg-6 col-xs-6">-->
+				<!--<span class="input-group-addon">图片</span>-->
+                	<!--<input type="file" name="pic" /><br /> -->
+                	<!--<?php showImage($data['pic'], 100); ?>			</div>-->
+			<!--<div class="input-group col-lg-6 col-xs-6">-->
+				<!--<span class="input-group-addon" id="thumb">图片</span>-->
+				<!--<div class="col-sm-5">-->
+					<!--<input id="file_upload" type="file" multiple="true">-->
+					<!--<input id="file_upload_image"  name="pic" type="hidden" multiple="true" value="">-->
+				<!--</div>-->
+        <!--</div>-->
+				<!--<img style="display: none" id="upload_org_code_img" src="" width="150" height="150" alt="图片">-->
+			<div id="btn-group" class="input-group col-lg-6 col-xs-6" align="center">
+
+				<input type="button" class="btn btn-default" id="singcms-button-submit" value=" 确定 " />
+				<input type="reset" class="btn btn-default" id="cancel" value=" 取消  " />
+			</div>
+		</div>
     </form>
 </div>
 <script>
-$("#createtime").datepicker(); 
-UE.getEditor('duty', {
-	"initialFrameWidth" : "100%",   // 宽
-	"initialFrameHeight" : 80,      // 高
-	"maximumWords" : 10000            // 最大可以输入的字符数量
-});
-UE.getEditor('requirement', {
-	"initialFrameWidth" : "100%",   // 宽
-	"initialFrameHeight" : 80,      // 高
-	"maximumWords" : 10000            // 最大可以输入的字符数量
-});
+
 </script>
 			<!-- /.row -->
 
@@ -90,13 +101,23 @@ UE.getEditor('requirement', {
 </div>
 <!-- /#wrapper -->
 <script>
-    //    var SCOPE = {
-    //        'edit_url' : '/admin.php?c=content&a=edit',
-    //        'add_url' : '/admin.php?c=content&a=add',
-    //        'set_status_url' : '/admin.php?c=content&a=setStatus',
-    //        'sing_news_view_url' : '/index.php?c=view',
-    //        'listorder_url' : '/admin.php?c=content&a=listorder',
-    //        'push_url' : '/admin.php?c=content&a=push',
-    //    }
+        var SCOPE = {
+            'edit_url' : '/admin.php?c=Hire&a=edit',
+            'add_url' : '/admin.php?c=Hire&a=add',
+            'set_status_url' : '/admin.php?c=Hire&a=setStatus',
+            'ajax_upload_swf' : '/Public/js/party/uploadify.swf',
+            'ajax_upload_image_url' : '/admin.php?c=image&a=ajaxuploadimage',
+            'jump_url' : '/admin.php?c=Hire',
+//            'sing_news_view_url' : '/index.php?c=view',
+//            'listorder_url' : '/admin.php?c=content&a=listorder',
+//            'push_url' : '/admin.php?c=content&a=push',
+        }
+</script>
+<script src="/Public/js/admin/image.js"></script>
+<script>
+    var thumb = "";
+    if(thumb) {
+        $("#upload_org_code_img").show();
+    }
 </script>
 <include file="Index/footer" />

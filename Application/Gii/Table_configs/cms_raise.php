@@ -7,8 +7,8 @@ return array(
 	'diguiName' => '',        // 递归时用来显示的字段的名字，如cat_name（分类名称）
 	'pk' => 'raise_id',    // 表中主键字段名称
 	/********************* 要生成的模型文件中的代码 ******************************/
-	'insertFields' => "array('title','content','createtime','status','remark','pic')",
-	'updateFields' => "array('raise_id','title','content','createtime','status','remark','pic')",
+	'insertFields' => "array('title','content','createtime','status','remark')",
+	'updateFields' => "array('raise_id','title','content','createtime','status','remark')",
 	'validate' => "
 		array('title', '1,64', '募集基金标题的值最长不能超过 64 个字符！', 2, 'length', 3),
 		array('createtime', '1,25', '创建时间的值最长不能超过 25 个字符！', 2, 'length', 3),

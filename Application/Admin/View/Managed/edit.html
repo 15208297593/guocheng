@@ -1,4 +1,23 @@
 <include file="Index/header" />
+<style>
+	.label{
+		color:black;
+	}
+	.Managed>div{
+		margin-bottom: 20px;
+	}
+	.Managed{
+		margin-bottom:50px;
+	}
+	.Managed>div>textarea{
+		height:500px;
+		width:800px;
+	}
+	#btn-group>input{
+		margin: 10px;
+	}
+
+</style>
 <body>
 <div id="wrapper">
 
@@ -6,65 +25,45 @@
 	<div id="page-wrapper">
 
 		<div class="container-fluid" >
-
+			<ol class="breadcrumb">
+				<li>
+					<i class="fa fa-dashboard"></i>  <a href="/admin.php?c=Managed">旗下管理基金</a>
+				</li>
+				<li class="active">
+					<i class="fa fa-table"></i>编辑
+				</li>
+			</ol>
 			<!-- Page Heading -->
-
 <div class="main-div">
-    <form name="main_form" method="POST" action="__SELF__" enctype="multipart/form-data" >
+    <form id="singcms-form" name="main-form" method="POST" action="__SELF__" enctype="multipart/form-data" >
     	<input type="hidden" name="managed_id" value="<?php echo $data['managed_id']; ?>" />
-        <table cellspacing="1" cellpadding="3" width="100%">
-            <tr>
-                <td class="label">旗下管理基金id：</td>
-                <td>
-                    <input  type="text" name="managed_id" value="<?php echo $data['managed_id']; ?>" />
-                </td>
-            </tr>
-            <tr>
-                <td class="label">标题：</td>
-                <td>
+        <div class="Managed" width="100%">
+                    <input  type="hidden" name="managed_id" value="<?php echo $data['managed_id']; ?>" />
+			<div class="input-group col-lg-6 col-xs-6">
+				<span class="input-group-addon">标题</span>
                     <input  type="text" name="title" value="<?php echo $data['title']; ?>" />
-                </td>
-            </tr>
-            <tr>
-                <td class="label">创建时间：</td>
-                <td>
-                    <input id="createtime" type="text" name="createtime" value="<?php echo $data['createtime']; ?>" />
-                </td>
-            </tr>
-            <tr>
-                <td class="label">管理基金详情：</td>
-                <td>
+			</div>
+			<div class="input-group col-lg-6 col-xs-6">
+				<span class="input-group-addon">管理基金详情</span>
                 	<textarea id="content" name="content"><?php echo $data['content']; ?></textarea>
-                </td>
-            </tr>
-            <tr>
-                <td class="label">状态：</td>
-                <td>
-                    <input  type="text" name="status" value="<?php echo $data['status']; ?>" />
-                </td>
-            </tr>
-            <tr>
-                <td class="label">备注：</td>
-                <td>
-                    <input  type="text" name="remark" value="<?php echo $data['remark']; ?>" />
-                </td>
-            </tr>
-            <tr>
-                <td colspan="99" align="center">
-                    <input type="submit" class="button" value=" 确定 " />
-                    <input type="reset" class="button" value=" 重置 " />
-                </td>
-            </tr>
-        </table>
+			</div>
+			<!--<div class="input-group col-lg-6 col-xs-6">-->
+				<!--<span class="input-group-addon" id="thumb">图片</span>-->
+				<!--<div class="col-sm-5">-->
+					<!--<input id="file_upload" type="file" multiple="true">-->
+					<!--<input id="file_upload_image"  name="pic" type="hidden" multiple="true" value="">-->
+				<!--</div>-->
+        <!--</div>-->
+				<img style="display: none" id="upload_org_code_img" src="" width="150" height="150" alt="图片">
+			<div id="btn-group" class="input-group col-lg-6 col-xs-6" align="center">
+
+				<input type="button" class="btn btn-default" id="singcms-button-submit" value=" 确定 " />
+				<input type="reset" class="btn btn-default" id="cancel" value=" 取消  " />
+			</div>
     </form>
 </div>
 <script>
-$("#createtime").datepicker(); 
-UE.getEditor('content', {
-	"initialFrameWidth" : "100%",   // 宽
-	"initialFrameHeight" : 80,      // 高
-	"maximumWords" : 10000            // 最大可以输入的字符数量
-});
+
 </script>
 			<!-- /.row -->
 
@@ -79,13 +78,24 @@ UE.getEditor('content', {
 </div>
 <!-- /#wrapper -->
 <script>
-    //    var SCOPE = {
-    //        'edit_url' : '/admin.php?c=content&a=edit',
-    //        'add_url' : '/admin.php?c=content&a=add',
-    //        'set_status_url' : '/admin.php?c=content&a=setStatus',
-    //        'sing_news_view_url' : '/index.php?c=view',
-    //        'listorder_url' : '/admin.php?c=content&a=listorder',
-    //        'push_url' : '/admin.php?c=content&a=push',
-    //    }
+        var SCOPE = {
+            'edit_url' : '/admin.php?c=Managed&a=edit',
+            'add_url' : '/admin.php?c=Managed&a=add',
+            'set_status_url' : '/admin.php?c=Managed&a=setStatus',
+            'ajax_upload_swf' : '/Public/js/party/uploadify.swf',
+            'ajax_upload_image_url' : '/admin.php?c=image&a=ajaxuploadimage',
+            'jump_url' : '/admin.php?c=Managed',
+//            'sing_news_view_url' : '/index.php?c=view',
+//            'listorder_url' : '/admin.php?c=content&a=listorder',
+//            'push_url' : '/admin.php?c=content&a=push',
+        }
 </script>
+<script src="/Public/js/admin/image.js"></script>
 <include file="Index/footer" />
+<script>
+    var thumb = "";
+    if(thumb) {
+        $("#upload_org_code_img").attr('src',res_host+thumb);
+        $("#upload_org_code_img").show();
+    }
+</script>

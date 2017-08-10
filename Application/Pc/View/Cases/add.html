@@ -1,0 +1,134 @@
+<include file="Index/header" />
+<style>
+    .label{
+        color:black;
+    }
+    .Cases>div{
+        margin-bottom: 20px;
+    }
+    .Cases{
+        margin-bottom:50px;
+    }
+    .Cases>div>textarea{
+        height:240px;
+        width:800px;
+    }
+    #btn-group>input{
+        margin: 10px;
+    }
+
+</style>
+<body>
+<div id="wrapper">
+
+    <include file="Index/nav"/>
+    <script src="/Public/js/kindeditor/kindeditor-all.js"></script>
+    <div id="page-wrapper">
+
+        <div class="container-fluid" >
+            <ol class="breadcrumb">
+                <li>
+                    <i class="fa fa-dashboard"></i>  <a href="/admin.php?c=Cases"></a>
+                </li>
+                <li class="active">
+                    <i class="fa fa-table"></i>添加
+                </li>
+            </ol>
+            <!-- Page Heading -->
+
+<div class="main-div">
+    <form id="singcms-form" name="main_form" method="POST" action="__SELF__" enctype="multipart/form-data">
+        <div class="Cases" width="100%">
+            <div class="input-group col-lg-6 col-xs-6">
+                <span class="input-group-addon">成功案例标题</span>
+                    <input  type="text" name="title" value="" />
+            </div>
+            <div class="input-group col-lg-6 col-xs-6">
+                <span class="input-group-addon">内容</span>
+                	<textarea class="input js-editor" id="editor_singcms" name="content"></textarea>
+            </div>
+            <div class="input-group col-lg-6 col-xs-6">
+                <span class="input-group-addon">移入效果标题</span>
+                    <input  type="text" name="hovertitle" value="" />
+            </div>
+            <div class="input-group col-lg-6 col-xs-6">
+                <span class="input-group-addon">移入效果第二行</span>
+                    <input  type="text" name="hoverone" value="" />
+            </div>
+            <div class="input-group col-lg-6 col-xs-6">
+                <span class="input-group-addon">移入效果第三行</span>
+                    <input  type="text" name="hovertwo" value="" />
+            </div>
+            <div class="input-group col-lg-6 col-xs-6">
+                <span class="input-group-addon" id="thumb">图片</span>
+                <div class="col-sm-5">
+                    <input id="file_upload" type="file" multiple="true">
+                    <input id="file_upload_image"  name="pic" type="hidden" multiple="true" value="">
+                </div>
+            </div>
+                <img style="display: none" id="upload_org_code_img" src="" width="150" height="150" alt="图片">
+        </div>
+
+            <div id="btn-group" class="input-group col-lg-6 col-xs-6" align="center">
+
+                <input type="button" class="btn btn-default" id="singcms-button-submit" value=" 确定 " />
+                <input type="reset" class="btn btn-default" id="cancel" value=" 取消  " />
+            </div>
+    </form>
+</div>
+<script>
+
+</script>
+            <!-- /.row -->
+
+
+
+        </div>
+        <!-- /.container-fluid -->
+
+    </div>
+    <!-- /#page-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+<script>
+        var SCOPE = {
+            'edit_url' : '/admin.php?c=Cases&a=edit',
+            'add_url' : '/admin.php?c=Cases&a=add',
+            'set_status_url' : '/admin.php?c=Cases&a=setStatus',
+            'ajax_upload_swf' : '/Public/js/party/uploadify.swf',
+            'ajax_upload_image_url' : '/admin.php?c=image&a=ajaxuploadimage',
+            'jump_url' : '/admin.php?c=Cases',
+        }
+</script>
+<script src="/Public/js/admin/image.js"></script>
+<script>
+    var thumb = "";
+    if(thumb) {
+        $("#upload_org_code_img").show();
+    }
+</script>
+<script>
+    // 6.2
+    KindEditor.ready(function(K) {
+        window.editor = K.create('#editor_singcms',{
+            items : [
+                'source', '|', 'undo', 'redo', '|', 'preview', 'print', 'template', 'code', 'cut', 'copy', 'paste',
+                'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+                'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+                'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
+                'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+                'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image',
+                'multiimage',
+                'table', 'hr', 'emoticons', 'baidumap', 'pagebreak',
+                'anchor', 'link', 'unlink', '|', 'about'
+            ],
+            minWidth : 800,
+            minHeight : 500,
+            urlType: 'domain',
+            uploadJson : '/admin.php?c=image&a=kindupload',
+            afterBlur : function(){this.sync();}, //
+        });
+    });
+</script>
+<include file="Index/footer" />

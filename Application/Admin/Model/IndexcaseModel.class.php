@@ -57,7 +57,8 @@ class IndexcaseModel extends Model
 	}
 	// 修改前
 	protected function _before_update(&$data, $option)
-	{$data['createtime'] = time();
+	{
+	    $data['createtime'] = time();
 		if(isset($_FILES['pic']) && $_FILES['pic']['error'] == 0)
 		{
 			$ret = uploadOne('pic', 'Admin', array(

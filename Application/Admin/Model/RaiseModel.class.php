@@ -21,8 +21,8 @@ class RaiseModel extends Model
 			$where['content'] = array('eq', $content);
 		if($createtime = I('get.createtime'))
 			$where['createtime'] = array('like', "%$createtime%");
-		if($status = I('get.status'))
-			$where['status'] = array('eq', $status);
+//		if($status = I('get.status'))
+			$where['status'] = array('eq', 1);
 		if($remark = I('get.remark'))
 			$where['remark'] = array('like', "%$remark%");
 		/************************************* 翻页 ****************************************/
@@ -61,37 +61,82 @@ class RaiseModel extends Model
 			}
 		}
 	}
+
+    //添加后
+    protected function _after_insert(&$data, $option){
+        $information_id = $data['raise_id'];
+        $model = M('Fileraise');
+        $upload = new \Think\Upload();
+        $upload->maxSize   =     3145728 ;// 设置附件上传大小
+//        $upload->exts      =     array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
+        $upload->rootPath  =     './Public/Uploads/'; // 设置附件上传根目录
+        $upload->savePath  =     ''; // 设置附件上传（子）目录
+        //上传文件
+        $info = $upload->upload();
+        if(!$info){
+            return($upload->getError());
+        }else{
+            $model = M('Fileraise');
+            foreach ($info as $key=>$val) {
+                $fileInfo['createtime'] = time();
+                $fileInfo['raise_id'] = $information_id;
+                $fileInfo['filename'] = $val['name'];
+                $fileInfo['filepath'] = './Public/Uploads/'.$val['savepath'] . $val['savename'];
+                $model->add($fileInfo);
+            }
+        }
+    }
 	// 修改前
 	protected function _before_update(&$data, $option)
 	{
 		if(isset($_FILES['pic']) && $_FILES['pic']['error'] == 0)
 		{
 			$ret = uploadOne('pic', 'Admin', array(
-				array(350, 350, 2),
-				array(150, 150, 2),
-				array(50, 50, 2),
 			));
 			if($ret['ok'] == 1)
 			{
 				$data['pic'] = $ret['images'][0];
-				$data['big_pic'] = $ret['images'][1];
-				$data['mid_pic'] = $ret['images'][2];
-				$data['sm_pic'] = $ret['images'][3];
 			}
 			else 
 			{
 				$this->error = $ret['error'];
 				return FALSE;
 			}
-			deleteImage(array(
-				I('post.old_pic'),
-				I('post.old_big_pic'),
-				I('post.old_mid_pic'),
-				I('post.old_sm_pic'),
-	
-			));
+//			deleteImage(array(
+//				I('post.old_pic'),
+//				I('post.old_big_pic'),
+//				I('post.old_mid_pic'),
+//				I('post.old_sm_pic'),
+//
+//			));
 		}
 	}
+    //添加后
+    protected function _after_update(&$data, $option){
+        $information_id = $data['raise_id'];
+        if($information_id != null){
+            $model = M('Fileraise');
+            $upload = new \Think\Upload();
+            $upload->maxSize   =     3145728 ;// 设置附件上传大小
+//        $upload->exts      =     array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
+            $upload->rootPath  =     './Public/Uploads/'; // 设置附件上传根目录
+            $upload->savePath  =     ''; // 设置附件上传（子）目录
+            //上传文件
+            $info = $upload->upload();
+            if(!$info){
+                return($upload->getError());
+            }else{
+                $model = M('Fileraise');
+                foreach ($info as $key=>$val) {
+                    $fileInfo['createtime'] = time();
+                    $fileInfo['raise_id'] = $information_id;
+                    $fileInfo['filename'] = $val['name'];
+                    $fileInfo['filepath'] = './Public/Uploads/'.$val['savepath'] . $val['savename'];
+                    $model->add($fileInfo);
+                }
+            }
+        }
+    }
 	// 删除前
 	protected function _before_delete($option)
 	{

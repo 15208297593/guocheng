@@ -46,10 +46,10 @@
 <?php endif; ?>
 <?php endforeach; ?>
 		        <td align="center">
-		        	<a href="<?php echo '<?php echo U(\'edit?'.$config['pk'].'=\'.$v[\''.$config['pk'].'\'].\'&p=\'.I(\'get.p\')); ?>'; ?>" title="编辑">
-						<span class="sing_cursor glyphicon glyphicon-edit" aria-hidden="true" id="singcms-edit" attr-id="22"></span>
+					<a href="<?php echo U('edit?managed_id='.$v['managed_id']); ?>" title="编辑">
+						<span class="sing_cursor glyphicon glyphicon-edit" aria-hidden="true" id="singcms-edit"></span>
 					</a>
-	                <a href="<?php echo '<?php echo U(\'delete?'.$config['pk'].'=\'.$v[\''.$config['pk'].'\'].\'&p=\'.I(\'get.p\')); ?>'; ?>" onclick="return confirm('确定要删除吗？');" title="移除">
+					<a href="javascript:void(0)" id="singcms-delete" attr-id="<?php echo $v['managed_id'] ; ?>" attr-message="移除">
 						<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
 					</a>
 		        </td>

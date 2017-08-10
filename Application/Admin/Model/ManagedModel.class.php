@@ -21,8 +21,8 @@ class ManagedModel extends Model
 			$where['createtime'] = array('like', "%$createtime%");
 		if($content = I('get.content'))
 			$where['content'] = array('eq', $content);
-		if($status = I('get.status'))
-			$where['status'] = array('eq', $status);
+//		if($status = I('get.status'))
+			$where['status'] = array('eq', 1);
 		if($remark = I('get.remark'))
 			$where['remark'] = array('like', "%$remark%");
 		/************************************* 翻页 ****************************************/

@@ -1,0 +1,104 @@
+<include file="Index/header" />
+<style>
+    .indexcase>div{
+        margin-bottom: 20px;
+    }
+    .indexcase{
+        margin-bottom:50px;
+    }
+    .indexcase>div>textarea{
+        height:150px;
+    }
+    #btn-group>input{
+        margin: 10px;
+    }
+
+</style>
+<body>
+<div id="wrapper">
+
+	<include file="Index/nav"/>
+	<div id="page-wrapper">
+
+		<div class="container-fluid" >
+            <ol class="breadcrumb">
+                <li>
+                    <i class="fa fa-dashboard"></i> <a href="/admin.php?c=indexcase">首页成功案例</a>
+                </li>
+                <li class="active">
+                    <i class="fa fa-edit"></i> 编辑
+                </li>
+            </ol>
+			<!-- Page Heading -->
+
+<div class="main-div">
+    <form id="singcms-form" name="singcms-form" method="POST" action="__SELF__" enctype="multipart/form-data" >
+    	<input type="hidden" name="indexcase_id" value="<?php echo $data['indexcase_id']; ?>" />
+		<!--<input type="hidden" name="old_pic" value="<?php echo $data['pic']; ?>" />-->
+        <table cellspacing="1" cellpadding="3" width="100%">
+            <div class="indexcase">
+                <div class="input-group col-lg-6 col-xs-6">
+                    <span class="input-group-addon" >首页成功案例标题</span>
+                    <input type="text" name="case_content" id="case_title" class="form-contro " value="<?php echo $data['title']; ?>"
+                           placeholder="请输入标题" aria-describedby="basic-addon1">
+                </div>
+                <div class="input-group col-lg-6 col-xs-6">
+                    <span class="input-group-addon" >首页成功案例内容</span>
+                    <textarea type="text" name="content" id="content" class="form-control " maxlength="50"
+                              placeholder="请输入内容" aria-describedby="basic-addon"><?php echo $data['content']; ?></textarea>
+                </div>
+                <div class="input-group col-lg-6 col-xs-6">
+                    <span class="input-group-addon" id="thumb1">首页成功案例缩略图</span>
+                    <div class="col-sm-5">
+                        <input id="file_upload" type="file" multiple="true">
+                        <input id="file_upload_image"  name="pic" type="hidden" multiple="true" value="<?php echo $data['pic']; ?>">
+                    </div>
+                </div>
+                        <img style="display: none" id="upload_org_code_img" src="<?php echo $data['pic']; ?>" width="150" height="150" alt="首页成功案例图片">
+            </div>
+            <div id="btn-group" class="input-group col-lg-6 col-xs-6" align="center">
+
+                    <input type="button" class="btn btn-default" id="singcms-button-submit" value=" 确定 " />
+                    <input type="reset" class="btn btn-default" id="cancel" value=" 取消  " />
+            </div>
+        </table>
+    </form>
+</div>
+<script>
+//$("#createtime").datepicker();
+//UE.getEditor('content', {
+//	"initialFrameWidth" : "100%",   // 宽
+//	"initialFrameHeight" : 80,      // 高
+//	"maximumWords" : 10000            // 最大可以输入的字符数量
+//});
+</script>
+			<!-- /.row -->
+
+
+
+		</div>
+		<!-- /.container-fluid -->
+
+	</div>
+	<!-- /#page-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+<script>
+        var SCOPE = {
+            'edit_url' : '/admin.php?c=indexcase&a=edit',
+            'add_url' : '/admin.php?c=indexcase&a=add',
+            'set_status_url' : '/admin.php?c=indexcase&a=setStatus',
+            'ajax_upload_swf' : '/Public/js/party/uploadify.swf',
+            'ajax_upload_image_url' : '/admin.php?c=image&a=ajaxuploadimage',
+            'jump_url' : '/admin.php?c=indexcase',
+        }
+</script>
+<script src="/Public/js/admin/image.js"></script>
+<script>
+    var thumb = "<?php echo $data['pic']; ?>";
+    if(thumb) {
+        $("#upload_org_code_img").show();
+    }
+</script>
+<include file="Index/footer" />
